@@ -19,7 +19,7 @@ class User
             return redirect()->route("login");
         }
 
-        $userRole = Auth::user()->role;
+        $userRole = Auth::user()->role; 
         if ($userRole == 2) {
             return $next($request);
         } else if ($userRole == 1) {
