@@ -29,32 +29,59 @@ https://templatemo.com/tm-556-catalog-z
     </div>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <i class="fas fa-film mr-2"></i>
-                Catalog-Z
+                1337 Share
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link nav-link-1" href="/">Photos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2 active" aria-current="page" href="/videos">Videos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">Contact</a>
-                </li>
-            </ul>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1"  href="/">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-2 active" aria-current="page" href="/videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="/images">Add</a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="/contact">Contact</a>
+                    </li>
+                    {{-- <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="/login">Login</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        @auth
+                            <a href="{{ url('/profile') }}" class="nav-link nav-link-5">Profile
+                            </a>
+                            <li class="nav-item">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+
+                            <a href="#" id="logout-btn" class="nav-link nav-link-6">Logout</a>
+                            </li>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-link nav-link-7">Log in
+                            </a>
+                            <li class="nav-item">
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="nav-link nav-link-8">Register
+                                </a>
+                            @endif
+                            </li>
+                        @endauth
+                    </li>
+
+                </ul>
             </div>
         </div>
     </nav>
-
     <div class="tm-hero d-flex justify-content-center align-items-center" id="tm-video-container">
         <video autoplay muted loop id="tm-video">
             <source src="video/hero.mp4" type="video/mp4">
@@ -93,84 +120,7 @@ https://templatemo.com/tm-556-catalog-z
                     <span>10,460 views</span>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-02.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Perfumes</h2>
-                        <a href="video-detail.html">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span>22 Oct 2020</span>
-                    <span>14,502 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-03.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Clocks</h2>
-                        <a href="video-detail.html">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span>18 Oct 2020</span>
-                    <span>11,906 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-04.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Plants</h2>
-                        <a href="video-detail.html">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span>12 Oct 2020</span>
-                    <span>16,100 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-05.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Morning</h2>
-                        <a href="video-detail.html">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span>24 Sep 2020</span>
-                    <span>16,008 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-06.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Pinky</h2>
-                        <a href="video-detail.html">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span>21 Sep 2020</span>
-                    <span>12,860 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-07.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Bus</h2>
-                        <a href="video-detail.html">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span>18 Sep 2020</span>
-                    <span>10,900 views</span>
-                </div>
-            </div>
+      
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="img/img-08.jpg" alt="Image" class="img-fluid">
@@ -340,7 +290,13 @@ https://templatemo.com/tm-556-catalog-z
             </div>
         </div>
     </div>
-    
+    <script>
+        // Sự kiện khi nhấn vào nút logout
+        document.getElementById('logout-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của nút
+            document.getElementById('logout-form').submit(); // Gửi request logout
+        });
+    </script>
     <script src="js/plugins.js"></script>
     <script>
         $(window).on("load", function() {

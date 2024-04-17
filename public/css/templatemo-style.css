@@ -242,7 +242,7 @@ a.tm-text-primary:hover { color:#666666; }
 .tm-search-input {
     width: 360px;
     border-radius: 0;
-    padding: 12px 15px;
+    padding: 11px 50px;
     color: #009999;
     border: none;
 }
@@ -572,6 +572,16 @@ select:not([multiple]) {
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color:  #009999;
     opacity: 1; /* Firefox */
+}
+
+.img-block {
+    height: 541px;
+}
+
+.img-block > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @media (max-width: 991px) {
