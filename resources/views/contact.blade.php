@@ -29,28 +29,56 @@ https://templatemo.com/tm-556-catalog-z
     </div>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <i class="fas fa-film mr-2"></i>
-                Catalog-Z
+                1337 Share
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link nav-link-1" href="index.html">Photos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="videos.html">Videos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="about.html">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-4 active" aria-current="page" href="contact.html">Contact</a>
-                </li>
-            </ul>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-1" href="/">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-2" href="/videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="/images">Add</a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4 active" aria-current="page" href="/contact">Contact</a>
+                    </li>
+                    {{-- <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="/login">Login</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        @auth
+                            <a href="{{ url('/profile') }}" class="nav-link nav-link-4">Profile
+                            </a>
+                            <li class="nav-item">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+
+                            <a href="#" id="logout-btn" class="nav-link nav-link-4">Logout</a>
+                            </li>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-link nav-link-4">Log in
+                            </a>
+                            <li class="nav-item">
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="nav-link nav-link-4">Register
+                                </a>
+                            @endif
+                            </li>
+                        @endauth
+                    </li>
+
+                </ul>
             </div>
         </div>
     </nav>
@@ -226,6 +254,13 @@ https://templatemo.com/tm-556-catalog-z
     <script>
         $(window).on("load", function() {
             $('body').addClass('loaded');
+        });
+    </script>
+      <script>
+        // Sự kiện khi nhấn vào nút logout
+        document.getElementById('logout-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định của nút
+            document.getElementById('logout-form').submit(); // Gửi request logout
         });
     </script>
 </body>
