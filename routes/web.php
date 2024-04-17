@@ -45,4 +45,4 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 // Route cho việc đăng nhập và đăng ký được xử lý bởi Laravel Jetstream
 // Route để xử lý yêu cầu xóa ảnh
-Route::delete('/images/delete/{imageId}', [ImageController::class, 'destroy']);
+Route::delete('/profile/delete/{id}', [ProfileController::class, 'delete'])->name('delete');

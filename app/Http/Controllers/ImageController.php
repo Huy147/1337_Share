@@ -20,15 +20,15 @@ class ImageController extends Controller
         // Kiểm tra xem có từ khóa tìm kiếm không
         if (!empty($keyword)) {
             // Tìm kiếm ảnh có tiêu đề chứa từ khóa
-            $images = Image::where('title', 'like', '%' . $keyword . '%')->paginate(20);
+            $images = Image::where('title', 'like', '%' . $keyword . '%')->paginate(12);
         } else {
             // Nếu không có từ khóa, hiển thị tất cả ảnh
-            $images = Image::paginate(20);
+            $images = Image::paginate(12);
         }
 
         return view('index', compact('images'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -140,4 +140,5 @@ class ImageController extends Controller
 
         return redirect()->back();
     }
+    
 }

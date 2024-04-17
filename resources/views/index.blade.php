@@ -53,7 +53,7 @@ https://templatemo.com/tm-556-catalog-z
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-3" href="/images">Add</a>
-                    </li>   
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-4" href="/contact">Contact</a>
                     </li>
@@ -64,23 +64,23 @@ https://templatemo.com/tm-556-catalog-z
                         @auth
                             <a href="{{ url('/profile') }}" class="nav-link nav-link-4">Profile
                             </a>
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
 
                             <a href="#" id="logout-btn" class="nav-link nav-link-4">Logout</a>
-                            </li>
-                        @else
-                            <a href="{{ route('login') }}" class="nav-link nav-link-4">Log in
-                            </a>
-                            <li class="nav-item">
+                        </li>
+                    @else
+                        <a href="{{ route('login') }}" class="nav-link nav-link-4">Log in
+                        </a>
+                        <li class="nav-item">
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="nav-link nav-link-4">Register
                                 </a>
                             @endif
-                            </li>
-                        @endauth
+                        </li>
+                    @endauth
                     </li>
 
                 </ul>
@@ -133,29 +133,25 @@ https://templatemo.com/tm-556-catalog-z
                         </figure>
                         <div class="d-flex justify-content-between tm-text-gray">
                             <span class="tm-text-gray-light">{{ $image->created_at->format('d M Y') }}</span>
-                            <svg id="heart-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                fill="currentColor" class="bi bi-heart">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-
+                            <!-- Phần tym -->
                             <style>
-                                #heart-icon {
-                                    cursor: pointer;
-                                    /* Set cursor to pointer on hover */
+                                /* CSS cho trạng thái hover */
+                                .heart-icon:hover path {
+                                    fill: red;
                                 }
 
-                                #heart-icon:hover {
+                                /* CSS cho trạng thái clicked */
+                                .heart-icon.clicked path {
                                     fill: red;
-                                    /* Change fill color to red on hover */
-                                }
-
-                                #heart-icon:active {
-                                    fill: red;
-                                    /* Maintain red fill color on click hold */
                                 }
                             </style>
-                             <span>{{ $image->viewed }} views</span> <!-- Hiển thị số lượt xem -->
+
+                            <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-heart" data-image-id="{{ $image->id }}">
+                                <path
+                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.920 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.090.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                            </svg>
+                            <span>{{ $image->viewed }} views</span> <!-- Hiển thị số lượt xem -->
                         </div>
                     </div>
                 @endforeach
@@ -244,6 +240,35 @@ https://templatemo.com/tm-556-catalog-z
         document.getElementById('logout-btn').addEventListener('click', function(event) {
             event.preventDefault(); // Ngăn chặn hành động mặc định của nút
             document.getElementById('logout-form').submit(); // Gửi request logout
+        });
+    </script>
+    <script>
+        // Sự kiện khi click vào trái tym
+        $('.heart-icon').on('click', function() {
+            var heartIcon = $(this); // Lưu tham chiếu đến đối tượng .heart-icon
+            var imageId = heartIcon.data('image-id');
+            var clicked = heartIcon.hasClass('clicked'); // Kiểm tra xem đã được click hay chưa
+            $.ajax({
+                url: '/images/' + imageId + '/like',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (!clicked) {
+                        heartIcon.addClass('clicked'); // Thêm class clicked nếu chưa có
+                        heartIcon.find('path').css('fill', 'red'); // Thay đổi màu sắc khi click
+                    } else {
+                        heartIcon.removeClass('clicked'); // Xóa class clicked nếu đã có
+                        heartIcon.find('path').css('fill', ''); // Xóa màu sắc khi hủy click
+                    }
+                    // Nếu cần thực hiện thêm bất kỳ thao tác nào sau khi like, bạn có thể thêm code ở đây
+                    // location.reload(); // Load lại trang sau khi like để cập nhật số lượt like (nếu cần)
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
     </script>
 

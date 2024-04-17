@@ -29,15 +29,16 @@ class ProfileController extends Controller
         return view('profile', compact('user', 'images'));
     }
     // Phương thức trong controller để xử lý yêu cầu xóa ảnh
-    public function destroy($imageId)
+    public function delete($id)
     {
-        // Tìm ảnh cần xóa
-        $image = Image::findOrFail($imageId);
-    
+        // Tìm ảnh dựa trên ID
+        $image = Image::findOrFail($id);
+        
         // Xóa ảnh khỏi cơ sở dữ liệu
         $image->delete();
-    
-        return response()->json(['message' => 'Image deleted successfully'], 200);
+        
+        // Chuyển hướng về trang trước hoặc trang khác
+        return redirect()->back()->with('success', 'Image deleted successfully');
     }
     
 }

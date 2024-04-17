@@ -118,9 +118,12 @@ https://templatemo.com/tm-556-catalog-z
                         </figure>
                         <div class="d-flex justify-content-between tm-text-gray">
                             <span class="tm-text-gray-light">{{ $image->created_at->format('d M Y') }}</span>
-                            <button class="btn btn-danger delete-image-btn"
-                                data-image-id="{{ $image->id }}">Xóa</button>
-                            <span>9,906 views</span>
+                            <form action="{{ route('delete', ['id' => $image->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <span>{{ $image->viewed }} views</span> <!-- Hiển thị số lượt xem -->
                         </div>
                     </div>
                 @endforeach
@@ -227,28 +230,35 @@ https://templatemo.com/tm-556-catalog-z
             $('body').addClass('loaded');
         });
     </script>
-    <script>
-        document.querySelectorAll('.delete-image-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                var imageId = this.getAttribute('data-image-id');
-
-                // Gửi yêu cầu xóa ảnh tới máy chủ sử dụng AJAX
-                fetch(`/images/delete/${imageId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+ <script>
+    $(document).ready(function() {
+        $('.delete-image-btn').click(function(e) {
+            e.preventDefault();
+            var imageId = $(this).data('image-id');
+            // Hiển thị hộp thoại xác nhận
+            if (confirm('Are you sure you want to delete this image?')) {
+                $.ajax({
+                    url: '/images/' + imageId,
+                    type: 'DELETE',
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+                        // Xử lý sau khi ảnh được xóa thành công
+                        console.log(data);
+                        // Cập nhật giao diện người dùng tại đây (nếu cần)
+                    },
+                    error: function(err) {
+                        console.error(err);
                     }
-                }).then(response => {
-                    if (response.ok) {
-                        // Xóa ảnh khỏi DOM nếu xóa thành công
-                        this.closest('.col-xl-3').remove();
-                    }
-                }).catch(error => {
-                    console.error('Error:', error);
                 });
-            });
+            }
         });
-    </script>
+    });
+</script>
+
+
+
 </body>
 
 <!-- Mirrored from templatemo.com/templates/templatemo_556_catalog_z/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 Apr 2024 15:53:38 GMT -->

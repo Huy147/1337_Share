@@ -262,6 +262,8 @@ https://templatemo.com/tm-556-catalog-z
                                         <option value="uiux">Animal</option>
                                         <option value="uiux">Book</option>
                                         <option value="uiux">Food</option>
+                                        <option value="uiux">Building</option>
+                                        <option value="uiux"></option>
                                     </select>
                                 </div>
 
